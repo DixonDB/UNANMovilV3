@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UNANMovilV2.Vistas.MostrarAsistencia"
+             NavigationPage.HasNavigationBar="False">
+    <Grid RowDefinitions="80,55,Auto,80" BackgroundColor="Gray">
+        <!--Espacio para el titulo de pagina principal !-->
+        <Grid ColumnDefinitions="80,*,70" ColumnSpacing="0" RowSpacing="0" BackgroundColor="#2F257C">
+            <!--Espacio para logo-->
+            <Grid RowDefinitions="*,*,*" Margin="10" ColumnSpacing="0" RowSpacing="0">
+                <Frame BackgroundColor="red"></Frame>
+                <Frame Grid.Row="1" BackgroundColor="Yellow"></Frame>
+                <Frame Grid.Row="2" BackgroundColor="Blue"></Frame>
+            </Grid>
+            <Image Source="Unan1.png" Aspect="AspectFit" Margin="10"/>
+            <!--Espacio para titulo de la app-->
+            <Frame Grid.Column="1" BackgroundColor="Transparent">
+                <Label Text="Control de Asistencia" HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="20" TextColor="WhiteSmoke"/>
+            </Frame>
+            <!--Boton de agregar-->
+            <Frame Grid.Column="2" HasShadow="False" BackgroundColor="Transparent">
+                <Button Grid.Column="2" BackgroundColor="Transparent"
+                 ImageSource="Add.png" x:Name="btnAdd" Clicked="btnAdd_Clicked"/>
+            </Frame>
+        </Grid>
+        <!--Barra de Buscar por fecha-->
+        <Grid Grid.Row="1" ColumnDefinitions="260,*" BackgroundColor="WhiteSmoke" HorizontalOptions="FillAndExpand" 
+           VerticalOptions="FillAndExpand" HeightRequest="100" WidthRequest="200" Margin="5,0,5,0">
+            <DatePicker VerticalOptions="Center" HorizontalOptions="End" TextColor="Black" x:Name="DpFecha"
+                        DateSelected="DpFecha_DateSelected"
+                     Margin="0,0,0,0" FontAttributes="Bold" FontSize="Large" HeightRequest="150" WidthRequest="160"/>
+            <ImageButton Grid.Column="1" Source="Buscar.png" HorizontalOptions="Start"
+                      BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50"/>
+        </Grid>
+        <!--Espacio de datos-->
+        <ScrollView Grid.Row="2" >
+            <CollectionView x:Name="lstAsis">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="5,0,5,0" BackgroundColor="White">
+                            <Label Grid.Column="2" Margin="5" Text="{Binding IdAsistencia}"
+                                   IsVisible="false"
+                                   HorizontalOptions="StartAndExpand" FontSize="25" TextColor="Black"/>
+                            <Grid ColumnDefinitions="180,155,50">
+                                <Label Margin="10,5,0,0" Text="{Binding Fecha}" HorizontalOptions="EndAndExpand" FontSize="25"
+                                        TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="1" Margin="30,5,5,5" Text="Bloques:" HorizontalOptions="EndAndExpand" FontSize="25" TextColor="Black"/>
+                                <Label Grid.Column="2" Margin="5" Text="{Binding Bloques}" HorizontalOptions="StartAndExpand" FontSize="25" TextColor="Black"/>
+                            </Grid>
+                            <Grid ColumnDefinitions="*,*,*,*">
+                                <Label Text="Entrada:" TextColor="Green" FontSize="20" HorizontalTextAlignment="End" FontAttributes="Bold"/>
+                                <Label Grid.Column="1" Text="{Binding HoraInicio}" HorizontalOptions="Start" FontSize="20"
+                                        TextColor="Green" FontAttributes="Bold"/>
+                                <Label Grid.Column="2" Text="Salida:" TextColor="red" FontSize="20"
+                                        HorizontalOptions="End" FontAttributes="Bold"/>
+                                <Label Grid.Column="3" Text="{Binding HoraFin}" TextColor="red" FontSize="20" 
+                                        HorizontalOptions="Start" FontAttributes="Bold"/>
+                            </Grid>
+                            <BoxView BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"
+                                                      CommandParameter="{Binding IdAsistencia}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <!--Barra de acceso directo-->
+        <Grid ColumnDefinitions="*,*" 
+              Grid.Row="3"
+              BackgroundColor="#2F257C">
+            <Button Text="Avance Programático" 
+            ImageSource="Asistencia.png"
+            FontSize="15"
+                    BackgroundColor="White"
+                    TextColor="Black"
+            FontAttributes="Bold"
+            x:Name="BtnAP"
+                    Clicked="BtnAP_Clicked"
+                    Margin="5"
+            />
+            <Button Text="Cerrar Sesión"
+            Grid.Column="1"
+            ImageSource="back.png"
+            FontSize="22"
+                    BackgroundColor="White"
+            TextColor="Black"
+            FontAttributes="Bold"
+            x:Name="BtnSalir"
+                    Clicked="BtnSalir_Clicked"
+                    Margin="5"/>
+        </Grid>
+    </Grid>
+</ContentPage>

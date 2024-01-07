@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="UNANMovilV2.Vistas.AddAvanceP">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,Auto,90" BackgroundColor="White" >
+            <Grid RowDefinitions="80,50,*">
+                <!-- Espacio para el título de la página -->
+                <Grid ColumnDefinitions="80,*,70" ColumnSpacing="0" RowSpacing="0" BackgroundColor="#2F257C">
+                    <!-- Espacio para el logo -->
+                    <Grid RowDefinitions="*,*,*" Margin="10" ColumnSpacing="0" RowSpacing="0">
+                        <Frame BackgroundColor="Red" />
+                        <Frame Grid.Row="1" BackgroundColor="Yellow" />
+                        <Frame Grid.Row="2" BackgroundColor="Blue" />
+                    </Grid>
+                    <Image Source="Unan1.png" Aspect="AspectFit" Margin="10" />
+                    <!-- Espacio para el título de la app -->
+                    <Frame Grid.Column="1" BackgroundColor="Transparent">
+                        <Label Text="Nuevo Avance Programático" HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="15" 
+                               TextColor="WhiteSmoke" />
+                    </Frame>
+                    <!-- Boton de Volver -->
+                    <Frame Grid.Column="2" HasShadow="False" BackgroundColor="Transparent">
+                        <Button Grid.Column="2" BackgroundColor="Transparent"
+                                ImageSource="flecha_left2.png" x:Name="btnCerrar" Clicked="btnCerrar_Clicked" />
+                    </Frame>
+                </Grid>
+                <!-- Contenedor de Fecha -->
+                <Frame HasShadow="False" Grid.Row="1" 
+                       BorderColor="Black" 
+                       BackgroundColor="White">
+                    <Label TextColor="Black" FontSize="20" FontAttributes="Bold"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center" Margin="-30"
+                    x:Name="LblFecha"/>
+                </Frame>
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <!--Datos a mostrar-->
+                <StackLayout Grid.Row="1">
+                    <!-- Contenedor del formulario a llenar -->
+                    <Grid BackgroundColor="White" x:Name="contenedor">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="200" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Contenedor de Asignatura/Componente -->
+                        <Grid Grid.Row="1" RowDefinitions="*,auto" Margin="0,0,0,5" Padding="0,-5,0,0" >
+                            <Label Text="Asignatura/Componente:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+                            Margin="10,0,0,0" FontAttributes="Bold" />
+                            <Frame Grid.Column="1"
+                           BorderColor="Black"
+                           Padding="51,1,1,1"
+                           Margin="-50,0,5,0">
+                                <Picker Grid.Column="1" TextColor="Black" Title="Asignatura" Margin="-50,0,0,0"
+                            HorizontalTextAlignment="Center" TitleColor="Gray"  FontSize="18" 
+                            x:Name="PcAsig" ItemDisplayBinding="{Binding Asignatura}" 
+                            SelectedIndexChanged="PcAsig_SelectedIndexChanged"/>
+                            </Frame>
+                        </Grid>
+
+                        <!-- Contenedor de carrera -->
+                        <Grid Grid.Row="2" ColumnDefinitions="*,Auto"  Margin="0,0,0,5" Padding="0,-5,0,0">
+                            <Label Text="Carrera:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+                                    FontAttributes="Bold" Margin="10,0,0,0" />
+                            <Frame Grid.Column="1"
+                           BorderColor="Black" Margin="-5,0,5,0"
+                                   Padding="51,10"
+                                   >
+                                <Label Grid.Column="1" Text="--" TextColor="Black" VerticalOptions="EndAndExpand"
+                            HorizontalTextAlignment="Center" FontSize="20"
+                           x:Name="LblCarrera" IsEnabled="False"
+                            />
+                            </Frame>
+                        </Grid>
+
+                        <!-- Contenedor de Grupo -->
+                        <Grid Grid.Row="3" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
+                            <Label Text="Grupo:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+                           HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                            <Frame Grid.Column="1"
+                           BorderColor="Black" Margin="0,0,5,0"
+                           Padding="51,10">
+                                <Label Text="--" Grid.Column="1" TextColor="Black" VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center" FontSize="20" x:Name="lblGrupo"/>
+                            </Frame>
+                        </Grid>
+                        <!--Ultimo tema-->
+                        <Grid Grid.Row="4" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
+                            <Label Text="Último tema:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+                           HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                            <Frame Grid.Column="1"
+                           BorderColor="Black" Margin="0,0,5,0"
+                           Padding="51,10">
+                                <Label Text="--" Grid.Column="1" TextColor="Black" VerticalOptions="EndAndExpand"
+                           HorizontalTextAlignment="Center" FontSize="20" x:Name="LblTema"/>
+                            </Frame>
+                        </Grid>
+                        <Frame Grid.Row="5" BorderColor="Black" Padding="10">
+                            <Label Text="Temas atrasados:" FontSize="20" HorizontalTextAlignment="Center"
+                                   FontAttributes="Bold" TextColor="Black"
+                                   />
+                        </Frame>
+                        <CollectionView x:Name="LstTemas" Grid.Row="6">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="2" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid RowDefinitions="20,4" BackgroundColor="Wheat"
+                                          Padding="5">
+                                        <Label Grid.Row="0" Text="{Binding IdTema}"
+                                               FontSize="15"
+                                               TextColor="Black"
+                                               HorizontalTextAlignment="Center"
+                                               IsVisible="false"
+                                               FontAttributes="Bold"/>
+                                        <Label Grid.Row="0" Text="{Binding Contenido}"
+                                               FontSize="15"
+                                               TextColor="Black"
+                                               HorizontalTextAlignment="Center"
+                                               FontAttributes="Bold"/>
+                                        <BoxView Grid.Row="3" BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Grid Grid.Row="7" RowDefinitions="*,150" BackgroundColor="White" >
+                            <Label Text="Causas de desfase:" TextColor="Black" FontSize="20"
+                                   FontAttributes="Bold" VerticalOptions="Center"
+                                   HorizontalOptions="CenterAndExpand"/>
+                            <Editor Margin="10" Grid.Row="1" TextColor="Black" x:Name="TxtDesfase" 
+                                    FontAttributes="Bold"
+                                    BackgroundColor="#b5b5b5" TextChanged="TxtDesfase_TextChanged"/>
+                        </Grid>
+                        <Grid Grid.Row="8" RowDefinitions="*,150" BackgroundColor="White">
+                            <Label Text="Medidas a tomar:" TextColor="Black" FontSize="20"
+                                   FontAttributes="Bold" VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
+                            <Editor Margin="10" Grid.Row="1" TextColor="Black" FontAttributes="Bold" x:Name="TxtMedidas"
+                                    BackgroundColor="#b5b5b5" TextChanged="TxtMedidas_TextChanged"/>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <Frame Grid.Row="2" BackgroundColor="White" BorderColor="Black">
+                <Button Text="Guardar" TextColor="Black" BackgroundColor="#0C7EF0" FontSize="20"
+                    FontAttributes="Bold" BorderColor="Gray" BorderWidth="2" CornerRadius="25"
+                    HorizontalOptions="CenterAndExpand" IsEnabled="False"
+                    x:Name="BtnGuardar" Clicked="BtnGuardar_Clicked" />
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

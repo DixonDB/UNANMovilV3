@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UNANMovilV2.Vistas.Asistencia"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content >
+        <Grid RowDefinitions="Auto,Auto,60" BackgroundColor="White">
+            <Grid RowDefinitions="80,55,*">
+                <!-- Espacio para el título de la página -->
+                <Grid ColumnDefinitions="80,*,70" ColumnSpacing="0" RowSpacing="0" BackgroundColor="#2F257C">
+                    <!-- Espacio para el logo -->
+                    <Grid RowDefinitions="*,*,*" Margin="10" ColumnSpacing="0" RowSpacing="0">
+                        <Frame BackgroundColor="Red" />
+                        <Frame Grid.Row="1" BackgroundColor="Yellow" />
+                        <Frame Grid.Row="2" BackgroundColor="Blue" />
+                    </Grid>
+                    <Image Source="Unan1.png" Aspect="AspectFit" Margin="10" />
+                    <!-- Espacio para el título de la app -->
+                    <Frame Grid.Column="1" BackgroundColor="Transparent">
+                        <Label Text="Nueva Asistencia" HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="20" TextColor="WhiteSmoke" />
+                    </Frame>
+                    <!-- Boton de Volver -->
+                    <Frame Grid.Column="2" HasShadow="False" BackgroundColor="Transparent">
+                        <Button Grid.Column="2" BackgroundColor="Transparent"
+            ImageSource="flecha_left2.png" x:Name="btnCerrar" Clicked="btnCerrar_Clicked" />
+                    </Frame>
+                </Grid>
+                <!-- Contenedor de Fecha -->
+                <Frame HasShadow="False" Grid.Row="1" Margin="5,-5,5,0" BackgroundColor="White"
+                       BorderColor="Black">
+                    <Label TextColor="Black" FontSize="20" FontAttributes="Bold"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="Center" Margin="-30"
+                                x:Name="LblFecha"/>
+                </Frame>
+            </Grid>
+            <ScrollView Grid.Row="1" Margin="5,-5,5,0">
+                <!-- Contenedor de Formulario -->
+                <Grid RowDefinitions="Auto,Auto,200" >
+                    <!-- Contenedor de Hora y Bloque a impartir -->
+                    <StackLayout BackgroundColor="White" Padding="10" x:Name="entrada">
+                        <!-- Contenedor de Hora de entrada -->
+                        <Grid ColumnDefinitions="Auto,Auto">
+                            <Label Text="Hora de entrada: " TextColor="Black" HorizontalOptions="EndAndExpand"
+                VerticalOptions="Center" FontAttributes="Bold" FontSize="25" />
+                            <TimePicker Grid.Column="1" FontSize="23" TextColor="Green" 
+                                        HorizontalOptions="StartAndExpand"
+                                        x:Name="TPHoraE"
+                                        VerticalOptions="CenterAndExpand" 
+                                        PropertyChanged="TPHoraE_PropertyChanged"/>
+                        </Grid>
+                        <!-- Bloques a impartir -->
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Text="Bloques a impartir:" TextColor="Black"
+                                   FontAttributes="Bold" FontSize="20" VerticalOptions="CenterAndExpand" />
+                            <Frame Grid.Column="1"
+                                   BorderColor="Black"
+                                   Padding="5"
+                                   >
+                                <Entry Keyboard="Numeric" TextColor="Black" 
+                                   FontAttributes="Bold" Text="1"
+                                   FontSize="20" PlaceholderColor="Gray" 
+                                       HorizontalTextAlignment="Center"
+                                    x:Name="nudBloque"/>
+                            </Frame>
+                            <Button Text="Aceptar" Grid.Column="2" FontSize="20" TextColor="Black"
+                                    BackgroundColor="#FFFF80" FontAttributes="Bold" BorderColor="Black"
+                                    BorderWidth="2" CornerRadius="25" Margin="10" Clicked="Button_Clicked" 
+                                    x:Name="BtnAgregar"/>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1">
+                        <!-- Contenedor del formulario a llenar -->
+                        <Grid BackgroundColor="#b5b5b5" IsEnabled="false" x:Name="contenedor">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Contenedor del indicador del bloque -->
+
+                            <Grid ColumnDefinitions="*,*" Margin="10">
+                                <Label Text="Bloque: #" TextColor="Black" FontSize="20"
+                                            HorizontalOptions="End" FontAttributes="Bold" />
+                                <Label Grid.Column="1" x:Name="LblNum" TextColor="Black" FontSize="20"
+                                            HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            </Grid>
+
+                            <!-- Contenedor de Asignatura/Componente -->
+                            <Grid Grid.Row="1" RowDefinitions="*,auto" Margin="0,0,0,5" Padding="0,-5,0,0" >
+                                <Label Text="Asignatura/Componente:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+                                        Margin="10,0,0,0" FontAttributes="Bold" />
+                                <Frame Grid.Column="1"
+                                       BorderColor="Black"
+                                       Padding="60,10,10,10"
+                                       Margin="-50,0,5,0">
+                                    <Picker Grid.Column="1" TextColor="Black" Title="Asignatura" Margin="-50,0,0,0"
+                                        HorizontalTextAlignment="Center" TitleColor="Gray"  FontSize="18" 
+                                        x:Name="PcAsig" ItemDisplayBinding="{Binding Asignatura}"
+                                        SelectedIndexChanged="PcAsig_SelectedIndexChanged"/>
+                                </Frame>
+                            </Grid>
+
+                            <!-- Contenedor de carrera -->
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" >
+                                <Label Text="Carrera:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+            HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                <Frame Grid.Column="1"
+                                       BorderColor="Black" HeightRequest="50"
+                                       Margin="0,0,5,0"
+                                       Padding="50,0,10,10" VerticalOptions="CenterAndExpand">
+                                    <Label Grid.Column="1" Text="--" TextColor="Black" VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center" FontSize="20" 
+                                       x:Name="LblCarrera" IsEnabled="False"/>
+                                </Frame>
+                            </Grid>
+
+                            <!-- Contenedor de Grupo -->
+                            <Grid Grid.Row="3" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
+                                <Label Text="Grupo:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+                                       HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                <Frame Grid.Column="1"
+                                       BorderColor="Black" HeightRequest="50"
+                                       Padding="50,0,10,10" Margin="0,0,5,0">
+                                    <Label Text="--" Grid.Column="1" TextColor="Black" VerticalOptions="EndAndExpand"
+                                       HorizontalTextAlignment="Center" FontSize="20" x:Name="lblGrupo"/>
+                                </Frame>
+                            </Grid>
+
+                            <!-- Contenedor de Contenido a impartir -->
+                            <Grid Grid.Row="4" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
+                                <Label Text="Contenido:" TextColor="Black" FontSize="20" VerticalOptions="Center"
+                                       HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                <Frame Grid.Column="1"
+                                       BorderColor="Black"
+                                       Padding="50,0,10,0" Margin="0,0,5,0">
+                                    <Picker Grid.Column="1" TextColor="Black" Title="Contenidos" VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center" TitleColor="Gray" FontSize="20" x:Name="PcContenido" 
+                                        ItemDisplayBinding="{Binding Contenido}" 
+                                            Margin="3"/>
+                                </Frame>
+                            </Grid>
+
+                            <!--Contenedor de mujeres-->
+                            <Grid Grid.Row="5" ColumnDefinitions="Auto,60, auto,60" Margin="0,5,0,0">
+                                <Label Text="Mujeres:" TextColor="Black" 
+                                       FontSize="20" VerticalOptions="Center"
+                                       HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                <Frame Grid.Column="1"
+                                       BorderColor="Black"
+                                       Padding="1">
+                                    <Entry Grid.Column="1" TextColor="Black" VerticalOptions="EndAndExpand"
+                                       FontSize="20" x:Name="TxtMujeres" Keyboard="Numeric"
+                                       BackgroundColor="WhiteSmoke" IsTextPredictionEnabled="True" 
+                                       HorizontalTextAlignment="Center" TextChanged="TxtMujeres_TextChanged"/>
+                                </Frame>
+                                <Label Grid.Column="2" Text="Varones:" TextColor="Black" 
+                                       FontSize="20" VerticalOptions="Center"
+                                       HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                <Frame
+                                    Grid.Column="3"
+                                    BorderColor="Black"
+                                    Padding="1">
+                                    <Entry Grid.Column="3" TextColor="Black" VerticalOptions="EndAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="20" Keyboard="Numeric"
+                                       BackgroundColor="WhiteSmoke" IsTextPredictionEnabled="True"
+                                       x:Name="TxtVarones" TextChanged="TxtVarones_TextChanged"
+                                       />
+                                </Frame>
+                            </Grid>
+                            <Grid Grid.Row="6" ColumnDefinitions="Auto,Auto,Auto,Auto" Margin="0,5,0,0">
+                                <Label Text="Mujeres inscritas:" TextColor="Black" 
+                                       FontSize="18" VerticalOptions="Center"
+                                       HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                <Label Grid.Column="1" TextColor="Black" VerticalOptions="EndAndExpand"
+                                       FontSize="18" x:Name="LblMujeres" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="Varones inscritos:" TextColor="Black" 
+                                       FontSize="18" VerticalOptions="Center"
+                                       HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+
+                                <Label Grid.Column="3" TextColor="Black" VerticalOptions="EndAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="18" 
+                                       x:Name="LblVarones"
+                                       />
+                            </Grid>
+
+                            <!-- Boton de agregar los datos del bloque -->
+                            <Button Grid.Row="8" Text="Agregar Bloque" TextColor="Black" 
+                                    BackgroundColor="Gray" FontSize="20"
+                                    IsEnabled="False"
+                                    HorizontalOptions="CenterAndExpand" 
+                                    VerticalOptions="CenterAndExpand" CornerRadius="25"
+                                    FontAttributes="Bold" Margin="0,10" 
+                                    BorderColor="Black" BorderWidth="2" 
+                                    x:Name="BtnBloque" Clicked="BtnBloque_Clicked"/>
+                        </Grid>
+                    </StackLayout>
+                    <!-- Contenedor de datos -->
+                    <CollectionView Grid.Row="2" x:Name="Datos">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowDefinitions="20,20,20,20,AUTO,4" BackgroundColor="Wheat" 
+                                      Padding="5">
+                                    <Label Grid.Row="0" Text="{Binding Asignatura}"
+                                           FontSize="15"
+                                           TextColor="Black"
+                                           HorizontalTextAlignment="Center"
+                                           FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" Text="{Binding Carrera}"
+                                           FontSize="15"
+                                           TextColor="Black"
+                                           HorizontalTextAlignment="Center"
+                                           FontAttributes="Bold"/>
+                                    <Label Grid.Row="2" Text="{Binding Grupo}"
+                                           FontSize="15"
+                                           TextColor="Black"
+                                           HorizontalTextAlignment="Center"
+                                           FontAttributes="Bold"/>
+                                    <Label Grid.Row="3" Text="{Binding Contenido}"
+                                           FontSize="15"
+                                           TextColor="Black"
+                                           HorizontalTextAlignment="Center"
+                                           FontAttributes="Bold"/>
+                                    <!--Contenedor de Estudiantes-->
+                                    <Grid Grid.Row="4" ColumnDefinitions="*,*,*,*">
+                                        <Label Text="Mujeres: "
+                                               FontSize="15"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"/>
+
+                                        <Label Grid.Column="1" Text="{Binding Mujeres}"
+                                           FontSize="15"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"/>
+
+                                        <Label Grid.Column="2" Text="Varones: "
+                                               FontSize="15"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"/>
+
+                                        <Label Grid.Column="3" Text="{Binding Varones}"
+                                           FontSize="15"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"/>
+
+                                    </Grid>
+                                    <BoxView Grid.Row="5" BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </ScrollView>
+            <StackLayout Grid.Row="2" BackgroundColor="White">
+                        <Button Text="Guardar" TextColor="Black" BackgroundColor="#0C7EF0" FontSize="20"
+                                FontAttributes="Bold" BorderColor="Gray" BorderWidth="2" CornerRadius="25"
+                                HorizontalOptions="CenterAndExpand"
+                                x:Name="BtnGuardar" IsEnabled="False"
+                                Clicked="BtnGuardar_Clicked"/>
+                    </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

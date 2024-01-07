@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="UNANMovilV2.Vistas.DetalleAP">
+    <ContentPage.Content>
+        <!--Contenedor principal-->
+        <Grid RowDefinitions="80,auto,*" BackgroundColor="Gray">
+            <!--Contenedor de la cabecera-->
+            <Grid ColumnDefinitions="80,*,70" ColumnSpacing="0" RowSpacing="0" BackgroundColor="#2F257C">
+                <!--Espacio para logo-->
+                <Grid RowDefinitions="*,*,*" Margin="10" ColumnSpacing="0" RowSpacing="0">
+                    <Frame BackgroundColor="red"></Frame>
+                    <Frame Grid.Row="1" BackgroundColor="Yellow"></Frame>
+                    <Frame Grid.Row="2" BackgroundColor="Blue"></Frame>
+                </Grid>
+                <Image Source="Unan1.png" Aspect="AspectFit" Margin="10"/>
+                <!--Espacio para titulo de la pantalla-->
+                <Frame Grid.Column="1" BackgroundColor="Transparent">
+                    <Label Text="Detalle de avance programático" HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="14" TextColor="WhiteSmoke"/>
+                </Frame>
+                <!--Boton de Volver-->
+                <Button Grid.Column="2" BackgroundColor="Transparent"
+                        ImageSource="flecha_left2.png" x:Name="BtnAtras"  
+                            Clicked="BtnAtras_Clicked"/>
+            </Grid>
+            <!--Detalles-->
+            <!--Contenedor de Datos generales-->
+            <StackLayout Grid.Row="1" BackgroundColor="WhiteSmoke" Orientation="Vertical">
+                <!--Texto de Encabezado Fecha-->
+                <Frame HeightRequest="20" BorderColor="Black" Padding="10">
+                    <Label HorizontalOptions="CenterAndExpand"
+                           FontAttributes="Bold" FontSize="20" TextColor="Black"
+                           x:Name="LblFecha" Margin="-5" />
+                </Frame>
+                <Grid ColumnDefinitions="*,*" Padding="10,0,10,0">
+                    <Label Text="Grupo: " TextColor="Black" FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"/>
+                    <Label x:Name="LblGrupo" Grid.Column="1" FontSize="20" 
+                            FontAttributes="Bold" TextColor="#301C1C"
+                           HorizontalOptions="Start"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" Padding="10,0,10,0">
+                    <Label Text="Asignatura: " TextColor="Black" 
+                               FontSize="20" FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"/>
+                    <Label x:Name="LblAsignatura" Grid.Column="1"
+                               FontSize="20"
+                               FontAttributes="Bold" TextColor="#301C1C"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*,*" Padding="10,0,10,0">
+                        <Label  Text="Carrera: " TextColor="Black" FontSize="20" 
+                               FontAttributes="Bold" 
+                                HorizontalTextAlignment="Center"/>
+                        <Label x:Name="LblCarrera" Grid.Column="1" FontSize="15"
+                                FontAttributes="Bold" TextColor="#301C1C"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" Padding="10,0,10,0">
+                        <Label  Text="Último tema impartido: " TextColor="Black" FontSize="20" 
+                               FontAttributes="Bold" 
+                                HorizontalTextAlignment="Center"/>
+                        <Label x:Name="LblUltimo" Grid.Column="1" FontSize="15"
+                                FontAttributes="Bold" TextColor="#301C1C"/>
+                    </Grid>
+                    
+            </StackLayout>
+
+            <ScrollView Grid.Row="2">
+                <!--Datos a mostrar-->
+                <StackLayout Grid.Row="1">
+                    <!-- Contenedor del formulario a llenar -->
+                    <Grid BackgroundColor="White" x:Name="contenedor">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <CollectionView x:Name="LstTemas" >
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="2" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid RowDefinitions="20,4" BackgroundColor="Wheat"
+                              Padding="5">
+                                        <Label Grid.Row="0" Text="{Binding IdTema}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   IsVisible="false"
+                                   FontAttributes="Bold"/>
+                                        <Label Grid.Row="0" Text="{Binding Contenido}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   FontAttributes="Bold"/>
+                                        <BoxView Grid.Row="3" BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Grid Grid.Row="3" RowDefinitions="*,150" BackgroundColor="White" >
+                            <Label Text="Causas de desfase:" TextColor="Black" FontSize="20"
+                                   FontAttributes="Bold" VerticalOptions="Center"
+                                   HorizontalOptions="CenterAndExpand"/>
+                            <Label Margin="20" Grid.Row="1" TextColor="Black" x:Name="TxtDesfase" 
+                                    FontAttributes="Bold" />
+                            </Grid>
+                        <Grid Grid.Row="4" RowDefinitions="*,150" BackgroundColor="White">
+                            <Label Text="Medidas a tomar:" TextColor="Black" FontSize="20"
+                                   FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Margin="20" Grid.Row="1" TextColor="Black" FontAttributes="Bold" x:Name="TxtMedidas"
+                                     />
+                            </Grid>
+                                   
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

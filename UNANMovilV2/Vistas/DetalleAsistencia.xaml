@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UNANMovilV2.Vistas.DetalleAsistencia"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <!--Contenedor principal-->
+        <Grid RowDefinitions="80,120,*" BackgroundColor="Gray">
+            <!--Contenedor de la cabecera-->
+            <Grid ColumnDefinitions="80,*,70" ColumnSpacing="0" RowSpacing="0" BackgroundColor="#2F257C">
+                <!--Espacio para logo-->
+                <Grid RowDefinitions="*,*,*" Margin="10" ColumnSpacing="0" RowSpacing="0">
+                    <Frame BackgroundColor="red"></Frame>
+                    <Frame Grid.Row="1" BackgroundColor="Yellow"></Frame>
+                    <Frame Grid.Row="2" BackgroundColor="Blue"></Frame>
+                </Grid>
+                <Image Source="Unan1.png" Aspect="AspectFit" Margin="10"/>
+                <!--Espacio para titulo de la pantalla-->
+                <Frame Grid.Column="1" BackgroundColor="Transparent">
+                    <Label Text="Detalle de Asistencia" HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="20" TextColor="WhiteSmoke"/>
+                </Frame>
+                <!--Boton de Volver-->
+                <Frame Grid.Column="2" BackgroundColor="Transparent">
+                    <Button Grid.Column="2" BackgroundColor="Transparent"
+                ImageSource="Editar.png" x:Name="BtnEditar" Clicked="BtnEditar_Clicked"/>
+                </Frame>
+            </Grid>
+            <!--Contenedor de detalles-->
+            <!--Contenedor de Datos generales-->
+            <StackLayout Grid.Row="1" BackgroundColor="WhiteSmoke">
+                <!--Texto de Encabezado Fecha-->
+                <Label VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"
+                       FontAttributes="Bold" FontSize="25" TextColor="Black" x:Name="LblFecha"/>
+                <!--Contenedor de Horas laboradas-->
+                <Grid Grid.Column="1" ColumnDefinitions="*,auto,*,auto" Padding="10,0,10,0">
+                    <Label Text="Hora de entrada: " TextColor="Green" FontSize="20" FontAttributes="Bold"
+                           HorizontalTextAlignment="End"/>
+                    <Label x:Name="LblHoraI" Grid.Column="1" FontSize="34" HorizontalTextAlignment="Start"
+                           FontAttributes="Bold" TextColor="#301C1C"/>
+                    <Label Grid.Column="2" Text="Hora de Salida: " TextColor="red" FontSize="20" FontAttributes="Bold"
+                           HorizontalTextAlignment="End"/>
+                    <Label x:Name="LblHoraF" Grid.Column="3" FontSize="34" HorizontalTextAlignment="Start"
+                           FontAttributes="Bold" TextColor="#301C1C"/>
+                </Grid>
+            </StackLayout>
+            <!--Contenedor de Detalles de los bloques-->
+            <ScrollView Grid.Row="2">
+                <CollectionView x:Name="lstAsis">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout BackgroundColor="WhiteSmoke">
+                                <!--Detalles del bloque #1-->
+                                <StackLayout>
+                                    <!-- Contenedor de Asignatura/Componente -->
+                                    <Grid Grid.Row="0" RowDefinitions="*,auto" Margin="15,0,10,0" Padding="0,-5,0,0" >
+                                        <Label Text="Asignatura/Componente:" VerticalOptions="CenterAndExpand" 
+                                               HorizontalOptions="StartAndExpand"
+                                               FontAttributes="Bold" FontSize="25" TextColor="Black" />
+                                        <Label Grid.Column="1" HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="CenterAndExpand" FontSize="20" TextColor="#301C1C"
+                                               Text="{Binding Asignatura}"/>
+
+                                    </Grid>
+                                    <!--Contenedor de la carrera-->
+                                    <Grid Grid.Row="1" ColumnDefinitions="115,*" Margin="15,0,10,0">
+                                        <Label Text="Carrera: " VerticalOptions="CenterAndExpand" 
+                                               HorizontalOptions="StartAndExpand"
+                                               FontAttributes="Bold" FontSize="25" TextColor="Black"/>
+                                        <Label Text="{Binding Carrera}" Grid.Column="1" HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="CenterAndExpand" FontSize="20" TextColor="#301C1C"/>
+                                    </Grid>
+                                    <!--Contenedor de Contenido-->
+                                    <Grid ColumnDefinitions="170,*">
+                                        <Label Text="Contenido: " VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                          Margin="15,0,0,0" FontAttributes="Bold" FontSize="25" TextColor="Black"/>
+                                        <Label Grid.Column="1" Text="{Binding Contenido}" HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="CenterAndExpand" FontSize="20" TextColor="#301C1C"/>
+                                    </Grid>
+                                    <!--Contenedor de Estado-->
+                                    <Grid ColumnDefinitions="auto,*">
+                                        <Label Text="Estado:" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                               FontAttributes="Bold" FontSize="25" TextColor="Black" Margin="15,0,0,0"/>
+                                        <Label Grid.Column="1" Text="{Binding Estado}" HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="CenterAndExpand" FontSize="20" TextColor="Red" Margin="10,0,0,0"/>
+                                    </Grid>
+                                    <!--Contenedor de mujeres-->
+                                    <Grid Grid.Row="5" ColumnDefinitions="Auto,60, auto,60" Margin="0,5,0,0">
+                                        <Label Text="Mujeres:" TextColor="Black" 
+                                               FontSize="20" VerticalOptions="Center"
+                                               HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                        <Label Grid.Column="1" VerticalOptions="EndAndExpand"
+                                               FontSize="20" Text="{Binding Mujeres}"
+                                               TextColor="Black" Margin="0,0,0,5"
+                                               HorizontalTextAlignment="Center"/>
+                                        <Label Grid.Column="2" Text="Varones:" TextColor="Black" 
+                                               FontSize="20" VerticalOptions="Center"
+                                               HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
+                                        <Label Grid.Column="3" VerticalOptions="EndAndExpand"
+                                               FontSize="20" Text="{Binding Varones}"
+                                               TextColor="Black" Margin="0,0,0,5"
+                                               HorizontalTextAlignment="Center"/>
+                                    </Grid>
+
+                                    <BoxView BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
