@@ -113,7 +113,7 @@
                                     <Picker Grid.Column="1" TextColor="Black" Title="Contenidos" VerticalOptions="EndAndExpand"
                                         HorizontalTextAlignment="Center" TitleColor="Gray" FontSize="20" x:Name="PcContenido" 
                                         ItemDisplayBinding="{Binding Contenido}" 
-                                            Margin="3"/>
+                                            Margin="3" SelectedIndexChanged="PcContenido_SelectedIndexChanged"/>
                                 </Frame>
                             </Grid>
 

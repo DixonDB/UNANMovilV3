@@ -30,6 +30,8 @@ namespace UNANMovilV2.Vistas
             LblFecha.Text = DateTime.Now.ToString("dd/MMM/yyyy");
             TxtMujeres.IsEnabled = false;
             TxtVarones.IsEnabled = false;
+            PcBloque.IsEnabled = false;
+            PcContenido.IsEnabled = false;
         }
 
         private async void btnCerrar_Clicked(object sender, EventArgs e)
@@ -58,7 +60,7 @@ namespace UNANMovilV2.Vistas
                     LblCarrera.Text = funcion.carrera;
                     lblGrupo.Text = funcion.grupo;
                     LblTurno.Text = funcion.turno;
-
+                    PcContenido.IsEnabled = true;
                     var data = funcion.MostrarContenidos(asignaturaSeleccionada.IdAsig, funcion.grupo, Login.INSS);
                     PcContenido.ItemsSource = data;
                     funcion.MostrarVaronesMujeres(asignaturaSeleccionada.IdAsig,INSS);
@@ -189,6 +191,8 @@ namespace UNANMovilV2.Vistas
             TxtMujeres.Text = "";
             TxtVarones.Text = "";
             PcBloque.SelectedItem = null;
+            PcContenido.IsEnabled = false;
+            PcBloque.IsEnabled = false;
             TxtMujeres.IsEnabled = false;
             TxtVarones.IsEnabled = false;
             LblMujeres.Text = "";
@@ -264,6 +268,18 @@ namespace UNANMovilV2.Vistas
             {
                 TxtMujeres.IsEnabled = false;
                 TxtVarones.IsEnabled = false;
+            }
+        }
+
+        private void PcContenido_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PcContenido.SelectedItem!=null)
+            {
+                PcBloque.IsEnabled = true;
+            }
+            else
+            {
+                PcBloque.IsEnabled = false;
             }
         }
 
