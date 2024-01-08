@@ -25,10 +25,10 @@ namespace UNANMovilV2.VistasModelos
                 foreach (DataRow rdr in dt.Rows)
                 {
                     var parametros = new LAsistencia();
-                    parametros.IdAsistencia = int.Parse(rdr["IdAsistencia"].ToString());
+                    //parametros.IdAsistencia = int.Parse(rdr["IdAsistencia"].ToString());
                     parametros.Fecha = DateTime.Parse(rdr["Fecha"].ToString()).ToString("dd/MMM/yyyy");
-                    parametros.HoraInicio = DateTime.Parse(rdr["Hora de Entrada"].ToString()).ToString("HH:mm");
-                    parametros.HoraFin = DateTime.Parse(rdr["Hora de Salida"].ToString()).ToString("HH:mm");
+                    //parametros.HoraInicio = DateTime.Parse(rdr["Hora de Entrada"].ToString()).ToString("HH:mm");
+                    //parametros.HoraFin = DateTime.Parse(rdr["Hora de Salida"].ToString()).ToString("HH:mm");
                     parametros.Bloques = int.Parse(rdr["Bloques"].ToString());
                     LstAsis.Add(parametros);
                 }
@@ -56,13 +56,14 @@ namespace UNANMovilV2.VistasModelos
                 dt.Columns.Add("IdTema");
                 dt.Columns.Add("AsistenciaMujeres");
                 dt.Columns.Add("AsistenciaVarones");
+                dt.Columns.Add("Bloque");
 
                 int i = 1;
 
                 //Se recorre la lista agregando los parametros que seran enviados a la base de datos
                 foreach (var oElement in lst)
                 {
-                    dt.Rows.Add(i, oElement.IdAsig, oElement.IdTema, oElement.Mujeres, oElement.Varones);
+                    dt.Rows.Add(i, oElement.IdAsig, oElement.IdTema, oElement.Mujeres, oElement.Varones,oElement.Bloque);
                     i++;
                 }
 
@@ -73,7 +74,7 @@ namespace UNANMovilV2.VistasModelos
                 SqlCommand cmd = new SqlCommand("InsertarAsistenciaYBloques", Conexion.conectar);
                 var parameterlst = new SqlParameter("@ltsAsistencia", SqlDbType.Structured)
                 {
-                    TypeName = "Asistencias",
+                    TypeName = "Asistencia",
                     Value = dt
                 };
 
@@ -83,9 +84,6 @@ namespace UNANMovilV2.VistasModelos
                 cmd.Parameters.AddWithValue("@INSS", parametros.INSS);
                 cmd.Parameters.AddWithValue("@Fecha", parametros.Fecha2);
                 cmd.Parameters.AddWithValue("@Bloques", parametros.Bloques);
-                cmd.Parameters.AddWithValue("@HoraI", parametros.HoraInicio);
-                cmd.Parameters.AddWithValue("@HoraF", parametros.HoraFin);
-                cmd.Parameters.AddWithValue("@Observacion", parametros.Observacion);
                 cmd.ExecuteNonQuery();
                 Application.Current.MainPage.DisplayAlert("Éxito", "Registro realizado", "OK");
             }

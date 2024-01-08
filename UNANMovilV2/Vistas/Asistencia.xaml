@@ -38,42 +38,11 @@
             <ScrollView Grid.Row="1" Margin="5,-5,5,0">
                 <!-- Contenedor de Formulario -->
                 <Grid RowDefinitions="Auto,Auto,200" >
-                    <!-- Contenedor de Hora y Bloque a impartir -->
-                    <StackLayout BackgroundColor="White" Padding="10" x:Name="entrada">
-                        <!-- Contenedor de Hora de entrada -->
-                        <Grid ColumnDefinitions="Auto,Auto">
-                            <Label Text="Hora de entrada: " TextColor="Black" HorizontalOptions="EndAndExpand"
-                VerticalOptions="Center" FontAttributes="Bold" FontSize="25" />
-                            <TimePicker Grid.Column="1" FontSize="23" TextColor="Green" 
-                                        HorizontalOptions="StartAndExpand"
-                                        x:Name="TPHoraE"
-                                        VerticalOptions="CenterAndExpand" 
-                                        PropertyChanged="TPHoraE_PropertyChanged"/>
-                        </Grid>
-                        <!-- Bloques a impartir -->
-                        <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Text="Bloques a impartir:" TextColor="Black"
-                                   FontAttributes="Bold" FontSize="20" VerticalOptions="CenterAndExpand" />
-                            <Frame Grid.Column="1"
-                                   BorderColor="Black"
-                                   Padding="5"
-                                   >
-                                <Entry Keyboard="Numeric" TextColor="Black" 
-                                   FontAttributes="Bold" Text="1"
-                                   FontSize="20" PlaceholderColor="Gray" 
-                                       HorizontalTextAlignment="Center"
-                                    x:Name="nudBloque"/>
-                            </Frame>
-                            <Button Text="Aceptar" Grid.Column="2" FontSize="20" TextColor="Black"
-                                    BackgroundColor="#FFFF80" FontAttributes="Bold" BorderColor="Black"
-                                    BorderWidth="2" CornerRadius="25" Margin="10" Clicked="Button_Clicked" 
-                                    x:Name="BtnAgregar"/>
-                        </Grid>
-                    </StackLayout>
                     <StackLayout Grid.Row="1">
                         <!-- Contenedor del formulario a llenar -->
-                        <Grid BackgroundColor="#b5b5b5" IsEnabled="false" x:Name="contenedor">
+                        <Grid BackgroundColor="#b5b5b5" x:Name="contenedor">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -148,8 +117,23 @@
                                 </Frame>
                             </Grid>
 
+                            <!--Bloque a impartir-->
+                            <Grid ColumnDefinitions="Auto,*" Grid.Row="5"
+                                  Margin="0,5,0,5">
+                                <Label Text="Bloque a impartir:" TextColor="Black"
+                                       FontAttributes="Bold" FontSize="20" VerticalOptions="Center"
+                                       Margin="10,0,0,0"/>
+                                <Frame Grid.Column="1" BorderColor="Black"
+                                       Padding="2" Margin="0,0,10,0">
+                                    <Picker TextColor="Black" Title="Bloque a impartir"
+                                            BackgroundColor="White" HorizontalTextAlignment="Start"
+                                            TitleColor="Gray" FontSize="18"
+                                            x:Name="PcBloque" ItemDisplayBinding="{Binding Bloque}"
+                                            SelectedIndexChanged="PcBloque_SelectedIndexChanged"/>
+                                </Frame>
+                            </Grid>
                             <!--Contenedor de mujeres-->
-                            <Grid Grid.Row="5" ColumnDefinitions="Auto,60, auto,60" Margin="0,5,0,0">
+                            <Grid Grid.Row="6" ColumnDefinitions="Auto,60, auto,60" Margin="0,5,0,0">
                                 <Label Text="Mujeres:" TextColor="Black" 
                                        FontSize="20" VerticalOptions="Center"
                                        HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
@@ -176,7 +160,7 @@
                                        />
                                 </Frame>
                             </Grid>
-                            <Grid Grid.Row="6" ColumnDefinitions="Auto,Auto,Auto,Auto" Margin="0,5,0,0">
+                            <Grid Grid.Row="7" ColumnDefinitions="Auto,Auto,Auto,Auto" Margin="0,5,0,0">
                                 <Label Text="Mujeres inscritas:" TextColor="Black" 
                                        FontSize="18" VerticalOptions="Center"
                                        HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
@@ -192,12 +176,15 @@
                                        FontSize="18" 
                                        x:Name="LblVarones"
                                        />
+                                <Label Grid.Column="4" TextColor="Black"
+                                       VerticalOptions="EndAndExpand" HorizontalOptions="Center"
+                                       FontSize="18" x:Name="LblTurno"
+                                       IsVisible="false"/>
                             </Grid>
 
                             <!-- Boton de agregar los datos del bloque -->
                             <Button Grid.Row="8" Text="Agregar Bloque" TextColor="Black" 
                                     BackgroundColor="Gray" FontSize="20"
-                                    IsEnabled="False"
                                     HorizontalOptions="CenterAndExpand" 
                                     VerticalOptions="CenterAndExpand" CornerRadius="25"
                                     FontAttributes="Bold" Margin="0,10" 

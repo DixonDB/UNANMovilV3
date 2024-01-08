@@ -42,20 +42,11 @@
                             <Label Grid.Column="2" Margin="5" Text="{Binding IdAsistencia}"
                                    IsVisible="false"
                                    HorizontalOptions="StartAndExpand" FontSize="25" TextColor="Black"/>
-                            <Grid ColumnDefinitions="180,155,50">
+                            <Grid ColumnDefinitions="200,155,50">
                                 <Label Margin="10,5,0,0" Text="{Binding Fecha}" HorizontalOptions="EndAndExpand" FontSize="25"
                                         TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                                 <Label Grid.Column="1" Margin="30,5,5,5" Text="Bloques:" HorizontalOptions="EndAndExpand" FontSize="25" TextColor="Black"/>
                                 <Label Grid.Column="2" Margin="5" Text="{Binding Bloques}" HorizontalOptions="StartAndExpand" FontSize="25" TextColor="Black"/>
-                            </Grid>
-                            <Grid ColumnDefinitions="*,*,*,*">
-                                <Label Text="Entrada:" TextColor="Green" FontSize="20" HorizontalTextAlignment="End" FontAttributes="Bold"/>
-                                <Label Grid.Column="1" Text="{Binding HoraInicio}" HorizontalOptions="Start" FontSize="20"
-                                        TextColor="Green" FontAttributes="Bold"/>
-                                <Label Grid.Column="2" Text="Salida:" TextColor="red" FontSize="20"
-                                        HorizontalOptions="End" FontAttributes="Bold"/>
-                                <Label Grid.Column="3" Text="{Binding HoraFin}" TextColor="red" FontSize="20" 
-                                        HorizontalOptions="Start" FontAttributes="Bold"/>
                             </Grid>
                             <BoxView BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
                             <StackLayout.GestureRecognizers>

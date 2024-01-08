@@ -7,6 +7,7 @@ namespace UNANMovilV2.Modelos
         public string Asignatura { get; set; }
         public string Carrera { get; set; }
         public string Grupo { get; set; }
+        public string Bloque { get; set; }
         public string Turno { get; set; }
         public string Contenido { get; set; }
         public int TotalHora { get; set; }

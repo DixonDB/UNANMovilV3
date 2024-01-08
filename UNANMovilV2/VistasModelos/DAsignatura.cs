@@ -11,6 +11,7 @@ namespace UNANMovilV2.VistasModelos
     {
         public string carrera;
         public string grupo;
+        public string turno;
         public int varones, mujeres;
         public void MostrarVaronesMujeres(int IdAsignatura, int INSS)
         {
@@ -150,12 +151,45 @@ namespace UNANMovilV2.VistasModelos
                 cb.Fill(dt);
                 parametros.Carrera = dt.Rows[0]["Carrera"].ToString();
                 parametros.Grupo = dt.Rows[0]["Grupo"].ToString();
+                parametros.Turno = dt.Rows[0]["Turno"].ToString();
                 carrera = parametros.Carrera;
                 grupo = parametros.Grupo;
+                turno= parametros.Turno;
             }
             catch (Exception ex)
             {
                 Application.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
+            }
+            finally
+            {
+                Conexion.Cerrar();
+            }
+        }
+        public List<MAsignatura> MostrarBloquesCombo(string turno)
+        {
+            var LstBloque = new List<MAsignatura>();
+            try
+            {
+                Conexion.Abrir();
+                SqlCommand da = new SqlCommand("MostrarHorarioCombo", Conexion.conectar);
+                da.CommandType = CommandType.StoredProcedure;
+                da.Parameters.AddWithValue("@Turno", turno);
+                SqlDataAdapter cb = new SqlDataAdapter(da);
+                DataTable dt = new DataTable();
+                cb.Fill(dt);
+                foreach (DataRow rdr in dt.Rows)
+                {
+                    MAsignatura parametros = new MAsignatura();
+                    //parametros.IdTema = int.Parse(rdr["IdHora"].ToString());
+                    parametros.Bloque = rdr["Bloque"].ToString();
+                    LstBloque.Add(parametros);
+                }
+                return LstBloque;
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
+                return LstBloque;
             }
             finally
             {
