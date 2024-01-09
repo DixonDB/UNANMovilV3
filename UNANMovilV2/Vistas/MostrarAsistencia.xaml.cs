@@ -86,16 +86,15 @@ namespace UNANMovilV2.Vistas
             {
                 // Puedes acceder a las propiedades de asignatura y hacer lo que necesites
                 var IdAsis = Asis.IdAsistencia;
-                var HoraI = Asis.HoraInicio;
-                var HoraF = Asis.HoraFin;
                 var Fecha = Asis.Fecha;
-                MostrarDetalle(IdAsis,HoraI,HoraF,Fecha);
+                var Bloque = Asis.Bloques;
+                MostrarDetalle(IdAsis,Fecha,Bloque);
             }
         }
 
-        private void MostrarDetalle(int idAsis,string horai,string horaf,string fecha)
+        private void MostrarDetalle(int idAsis,string fecha, int bloque)
         {
-            Navigation.PushAsync(new DetalleAsistencia(idAsis,horai,horaf,fecha));
+            Navigation.PushAsync(new DetalleAsistencia(idAsis,fecha,bloque));
         }
 
         private void DpFecha_DateSelected(object sender, DateChangedEventArgs e)

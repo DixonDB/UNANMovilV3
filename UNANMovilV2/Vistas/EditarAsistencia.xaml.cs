@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UNANMovilV2.Modelos;
 using UNANMovilV2.VistasModelos;
 using Xamarin.Forms;
@@ -12,15 +13,16 @@ namespace UNANMovilV2.Vistas
     {
         DAsistencia Asis = new DAsistencia();
         int ID;
-        public EditarAsistencia(int IdAsis, string horai, string horaf, string fecha)
+        int bl;
+        public EditarAsistencia(int IdAsis, string fecha, int bloque)
         {
             InitializeComponent();
             var data = Asis.MostrarDetalleAsistencia(IdAsis);
             lstAsis.ItemsSource = data;
-            LblHoraI.Text = horai;
-            LblHoraF.Text = horaf;
             LblFecha.Text = fecha;
             ID = IdAsis;
+            bl = bloque;
+            LblBloques.Text = bloque.ToString();
         }
 
         private async void btnCerrar_Clicked(object sender, EventArgs e)
@@ -36,23 +38,21 @@ namespace UNANMovilV2.Vistas
         }
 
         Button stackLayout;
-        private void BtnEstado_Clicked(object sender, EventArgs e)
+        private async void BtnEstado_Clicked(object sender, EventArgs e)
         {
             stackLayout = (Button)sender;
             if (stackLayout.BindingContext is LAsistencia Asis)
             {
                 // Puedes acceder a las propiedades de asignatura y hacer lo que necesites
-                var IdAsis = Asis.IdAsistencia;
-                var HoraI = Asis.HoraInicio;
-                var HoraF = Asis.HoraFin;
-                var Fecha = Asis.Fecha;
+                //var IdAsis = Asis.IdAsistencia;
+                //var Fecha = Asis.Fecha;
                 var IdAsig = Asis.IdTema;
-                var Asignatura = Asis.Asignatura;
-                var Carrera = Asis.Carrera;
-                var Grupo = Asis.Grupo;
+                //var Asignatura = Asis.Asignatura;
+                //var Carrera = Asis.Carrera;
+                //var Grupo = Asis.Grupo;
                 var Contenido = Asis.Contenido;
-                var Mujeres = Asis.Mujeres;
-                var Varones = Asis.Varones;
+                //var Mujeres = Asis.Mujeres;
+                //var Varones = Asis.Varones;
                 var Estado = Asis.Estado;
                 if (Estado=="Proceso")
                 {
@@ -66,6 +66,8 @@ namespace UNANMovilV2.Vistas
                     datosList.Add(LstAsis);
                     Datos.ItemsSource = null; // Primero, limpia la fuente de datos existente
                     Datos.ItemsSource = datosList;
+                    DAsistencia funcion = new DAsistencia();
+                    funcion.FinAsistencias(datosList, ID);
                 }
                 else
                 {
@@ -79,6 +81,8 @@ namespace UNANMovilV2.Vistas
                     datosList.Add(LstAsis);
                     Datos.ItemsSource = null; // Primero, limpia la fuente de datos existente
                     Datos.ItemsSource = datosList;
+                    DAsistencia funcion = new DAsistencia();
+                    funcion.FinAsistencias(datosList, ID);
                 }
             }
         }

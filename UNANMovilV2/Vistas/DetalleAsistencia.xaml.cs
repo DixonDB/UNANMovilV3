@@ -10,28 +10,39 @@ namespace UNANMovilV2.Vistas
     {
         DAsistencia Asis = new DAsistencia();
         int ID;
-        public DetalleAsistencia(int IdAsis, string horai, string horaf, string fecha)
+        string Fecha;
+        int bl;
+        public DetalleAsistencia(int IdAsis, string fecha,int bloque)
         {
             InitializeComponent();
-            var data = Asis.MostrarDetalleAsistencia(IdAsis);
-            lstAsis.ItemsSource = data;
-            LblFecha.Text = fecha.ToString();
-            LblHoraI.Text = horai.ToString();
-            LblHoraF.Text = horaf.ToString();
             ID = IdAsis;
+            Fecha = fecha;
+            bl=bloque;
+            Mostrar();
         }
-
-        private async void Editar(int IdAsis, string horai, string horaf, string fecha)
+        private void Mostrar()
         {
-            await Navigation.PushAsync(new EditarAsistencia(IdAsis, horai, horaf, fecha));
+            var data = Asis.MostrarDetalleAsistencia(ID);
+            lstAsis.ItemsSource = data;
+            LblFecha.Text = Fecha.ToString();
+            LblBloque.Text= bl.ToString();
+
+        }
+        private async void Editar(int IdAsis, string fecha,int bloque)
+        {
+            await Navigation.PushAsync(new EditarAsistencia(IdAsis, fecha, bloque));
         }
 
         private void BtnEditar_Clicked(object sender, EventArgs e)
         {
-            var HoraI = LblHoraI.Text;
-            var HoraF = LblHoraF.Text;
             var Fecha = LblFecha.Text;
-            Editar(ID, HoraI, HoraF, Fecha);
+            var Bloque = int.Parse(LblBloque.Text);
+            Editar(ID, Fecha,Bloque);
+        }
+
+        protected override void OnAppearing()
+        {
+            Mostrar();
         }
     }
 }

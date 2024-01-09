@@ -33,17 +33,14 @@
                 <Label VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"
            FontAttributes="Bold" FontSize="25" TextColor="Black" x:Name="LblFecha"/>
                 <!--Contenedor de Horas laboradas-->
-                <Grid Grid.Column="1" ColumnDefinitions="*,auto,*,auto" Padding="10,0,10,0">
-                    <Label Text="Hora de entrada: " TextColor="Green" FontSize="20" FontAttributes="Bold"
-               HorizontalTextAlignment="End"/>
-                    <Label x:Name="LblHoraI" Grid.Column="1" FontSize="34" HorizontalTextAlignment="Start"
-               FontAttributes="Bold" TextColor="#301C1C"/>
-                    <Label Grid.Column="2" Text="Hora de Salida: " TextColor="red" FontSize="20" FontAttributes="Bold"
-               HorizontalTextAlignment="End"/>
-                    <Label x:Name="LblHoraF" Grid.Column="3" FontSize="34" HorizontalTextAlignment="Start"
-               FontAttributes="Bold" TextColor="#301C1C"/>
-                </Grid>
-            </StackLayout>
+                <Grid Grid.Column="1" ColumnDefinitions="*,*" Padding="10,0,10,0">
+                <Label Text="Bloques impartidos: " TextColor="Black" FontSize="22" FontAttributes="Bold"
+                           HorizontalTextAlignment="Start"
+                           Margin="0,10,0,0"/>
+                <Label x:Name="LblBloques" Grid.Column="1" FontSize="34" HorizontalTextAlignment="Start"
+                           FontAttributes="Bold" TextColor="#301C1C"/>
+        </Grid>
+        </StackLayout>
             <!--Contenedor de Detalles de los bloques-->
             <ScrollView Grid.Row="2">
                 <CollectionView x:Name="lstAsis">
@@ -138,12 +135,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!--Boton Guardar-->
-            <StackLayout Grid.Row="3" BackgroundColor="White" Padding="0,10,0,0">
-                <Button Text="Guardar" TextColor="Black" BackgroundColor="#0C7EF0" FontSize="20"
-                        FontAttributes="Bold" BorderColor="Gray" BorderWidth="2" CornerRadius="25"
-                        HorizontalOptions="CenterAndExpand" Margin="0,0,0,10" x:Name="btnGuardar" Clicked="btnGuardar_Clicked"/>
-            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -25,7 +25,7 @@ namespace UNANMovilV2.VistasModelos
                 foreach (DataRow rdr in dt.Rows)
                 {
                     var parametros = new LAsistencia();
-                    //parametros.IdAsistencia = int.Parse(rdr["IdAsistencia"].ToString());
+                    parametros.IdAsistencia = int.Parse(rdr["IdAsistencia"].ToString());
                     parametros.Fecha = DateTime.Parse(rdr["Fecha"].ToString()).ToString("dd/MMM/yyyy");
                     //parametros.HoraInicio = DateTime.Parse(rdr["Hora de Entrada"].ToString()).ToString("HH:mm");
                     //parametros.HoraFin = DateTime.Parse(rdr["Hora de Salida"].ToString()).ToString("HH:mm");
@@ -167,7 +167,7 @@ namespace UNANMovilV2.VistasModelos
                 cmd.Parameters.Add(parameterlst);
                 cmd.Parameters.AddWithValue("@IdAsistencia", IdAsistencia);
                 cmd.ExecuteReader();
-               Application.Current.MainPage.DisplayAlert("Asistencia Editada","Asistencia Guardada", "OK");
+               Application.Current.MainPage.DisplayAlert("Asistencia Editada", "Asistencia editada con éxito", "OK");
             }
             catch (Exception ex)
             {
