@@ -189,6 +189,7 @@
                                     VerticalOptions="CenterAndExpand" CornerRadius="25"
                                     FontAttributes="Bold" Margin="0,10" 
                                     BorderColor="Black" BorderWidth="2" 
+                                    IsEnabled="False"
                                     x:Name="BtnBloque" Clicked="BtnBloque_Clicked"/>
                         </Grid>
                     </StackLayout>

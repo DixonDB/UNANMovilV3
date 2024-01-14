@@ -197,6 +197,7 @@ namespace UNANMovilV2.Vistas
             TxtVarones.IsEnabled = false;
             LblMujeres.Text = "";
             LblVarones.Text = "";
+            BtnBloque.IsEnabled = false;
         }
 
 
