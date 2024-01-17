@@ -198,8 +198,8 @@ namespace UNANMovilV2.VistasModelos
                     var parametros = new LAsistencia();
                     parametros.IdAsistencia = int.Parse(rdr["IdAsistencia"].ToString());
                     parametros.Fecha = DateTime.Parse(rdr["Fecha"].ToString()).ToString("dd/MMM/yyyy");
-                    parametros.HoraInicio = DateTime.Parse(rdr["Hora de Entrada"].ToString()).ToString("HH:mm");
-                    parametros.HoraFin = DateTime.Parse(rdr["Hora de Salida"].ToString()).ToString("HH:mm");
+                    //parametros.HoraInicio = DateTime.Parse(rdr["Hora de Entrada"].ToString()).ToString("HH:mm");
+                    //parametros.HoraFin = DateTime.Parse(rdr["Hora de Salida"].ToString()).ToString("HH:mm");
                     parametros.Bloques = int.Parse(rdr["Bloques"].ToString());
                     LstAsis.Add(parametros);
                 }
