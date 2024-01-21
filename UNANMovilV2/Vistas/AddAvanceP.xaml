@@ -99,7 +99,7 @@
                         <Grid Grid.Row="4" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
                             <Label Text="Último tema:" TextColor="Black" FontSize="20" VerticalOptions="Center"
                            HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
-                            <Frame Grid.Column="1"
+                            <Frame Grid.Column="1" x:Name="FmUltimo"
                            BorderColor="Black" Margin="0,0,5,0"
                            Padding="51,10">
                                 <Label Text="--" Grid.Column="1" TextColor="Black" VerticalOptions="EndAndExpand"
@@ -153,7 +153,7 @@
                     </Grid>
                 </StackLayout>
             </ScrollView>
-            <Frame Grid.Row="2" BackgroundColor="White" BorderColor="Black">
+            <Frame Grid.Row="2" BackgroundColor="White" BorderColor="Black" x:Name="FmGuardar">
                 <Button Text="Guardar" TextColor="Black" BackgroundColor="#0C7EF0" FontSize="20"
                     FontAttributes="Bold" BorderColor="Gray" BorderWidth="2" CornerRadius="25"
                     HorizontalOptions="CenterAndExpand" IsEnabled="False"

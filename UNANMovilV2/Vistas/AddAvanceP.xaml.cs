@@ -24,6 +24,21 @@ namespace UNANMovilV2.Vistas
             BtnGuardar.IsEnabled = false;
         }
 
+        private void Fmguardar()
+        {
+            if (LblTema.Text == null) 
+            {
+                TxtDesfase.IsEnabled = false;
+                TxtMedidas.IsEnabled = false;
+                FmUltimo.BackgroundColor = Color.Red;
+            }
+            else
+            {
+                TxtMedidas.IsEnabled = true;
+                TxtDesfase.IsEnabled = true;
+                FmUltimo.BackgroundColor = Color.White;
+            }
+        }
         private async void btnCerrar_Clicked(object sender, EventArgs e)
         {
 			await Navigation.PopAsync();
@@ -48,6 +63,7 @@ namespace UNANMovilV2.Vistas
                     lblGrupo.Text = funcion.grupo;
                     AP.MostrarUltimoTema(parametros, Login.INSS);
                     LblTema.Text = AP.Cont;
+                    Fmguardar();
 
                     datosList = AP.MostrarTemasAtrasados(parametros, INSS);
                     LstTemas.ItemsSource= datosList;

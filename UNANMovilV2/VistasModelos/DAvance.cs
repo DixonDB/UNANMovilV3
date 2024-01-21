@@ -65,11 +65,18 @@ namespace UNANMovilV2.VistasModelos
                 DataTable dt = new DataTable();
                 cb.Fill(dt);
                 parametros.Contenido = dt.Rows[0]["Contenido"].ToString();
-                Cont = parametros.Contenido;
+                if (dt.Rows[0]["Contenido"].ToString()==null)
+                {
+                    Cont = "--";
+                }
+                else
+                {
+                    Cont = parametros.Contenido;
+                }
             }
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
+                //Application.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
             }
             finally
             {
@@ -99,6 +106,8 @@ namespace UNANMovilV2.VistasModelos
                     par.Contenido = rdr["Temas Atrasados"].ToString();
                     lstProg.Add(par);
                 }
+                parametros.Contenido = null;
+                Cont = parametros.Contenido;
                 return lstProg;
 
             }
