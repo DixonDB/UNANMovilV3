@@ -38,45 +38,101 @@ namespace UNANMovilV2.Vistas
         }
 
         Button stackLayout;
-        private async void BtnEstado_Clicked(object sender, EventArgs e)
+        //private async void BtnEstado_Clicked(object sender, EventArgs e)
+        //{
+        //    stackLayout = (Button)sender;
+        //    if (stackLayout.BindingContext is LAsistencia Asis)
+        //    {
+        //        var IdAsig = Asis.IdTema;
+        //        var Contenido = Asis.Contenido;
+        //        var Estado = Asis.Estado;
+        //        var mujeres = Asis.Mujeres;
+        //        var varones = Asis.Varones;
+        //        if (Estado == "Proceso")
+        //        {
+        //            LAsistencia LstAsis = new LAsistencia
+        //            {
+        //                IdTema = IdAsig,
+        //                Contenido = Contenido,
+        //                Estado = "Finalizado",
+        //                Mujeres=mujeres,
+        //                Varones=varones
+        //            };
+        //            stackLayout.IsEnabled = false;
+        //            datosList.Add(LstAsis);
+        //            Datos.ItemsSource = null;
+        //            Datos.ItemsSource = datosList;
+        //            DAsistencia funcion = new DAsistencia();
+        //            funcion.FinAsistencias(datosList, ID);
+        //            await Navigation.PushAsync(new MostrarAsistencia());
+        //        }
+        //        else
+        //        {
+        //            LAsistencia LstAsis = new LAsistencia
+        //            {
+        //                IdTema = IdAsig,
+        //                Contenido = Contenido,
+        //                Estado = "Proceso",
+        //                Mujeres = mujeres,
+        //                Varones = varones
+        //            };
+        //            stackLayout.IsEnabled = false;
+        //            datosList.Add(LstAsis);
+        //            Datos.ItemsSource = null;
+        //            Datos.ItemsSource = datosList;
+        //            DAsistencia funcion = new DAsistencia();
+        //            funcion.FinAsistencias(datosList, ID);
+        //            await Navigation.PushAsync(new MostrarAsistencia());
+        //        }
+        //    }
+        //}
+
+        private async void btnSalvar_Clicked(object sender, EventArgs e)
         {
-            stackLayout = (Button)sender;
-            if (stackLayout.BindingContext is LAsistencia Asis)
+            DAsistencia funcion = new DAsistencia();
+            funcion.FinAsistencias(datosList, ID);
+            await Navigation.PushAsync(new MostrarAsistencia());
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            try
             {
-                var IdAsig = Asis.IdTema;
-                var Contenido = Asis.Contenido;
-                var Estado = Asis.Estado;
-                if (Estado=="Proceso")
+                stackLayout = (Button)sender;
+                if (stackLayout.BindingContext is LAsistencia Asis)
                 {
+                    var IdAsig = Asis.IdTema;
+                    var Contenido = Asis.Contenido;
+                    var Estado = Asis.Estado;
+                    var mujeres = Asis.Mujeres;
+                    var varones = Asis.Varones;
                     LAsistencia LstAsis = new LAsistencia
                     {
                         IdTema = IdAsig,
                         Contenido = Contenido,
-                        Estado = "Finalizado"
+                        Estado = Estado,
+                        Mujeres = mujeres,
+                        Varones = varones
                     };
-                    stackLayout.IsEnabled = false;
-                    datosList.Add(LstAsis);
-                    Datos.ItemsSource = null;
-                    Datos.ItemsSource = datosList;
-                    DAsistencia funcion = new DAsistencia();
-                    funcion.FinAsistencias(datosList, ID);
-                }
-                else
-                {
-                    LAsistencia LstAsis = new LAsistencia
+                    if (mujeres < 0 || varones < 0)
                     {
-                        IdTema = IdAsig,
-                        Contenido = Contenido,
-                        Estado = "Proceso"
-                    };
-                    stackLayout.IsEnabled = false;
-                    datosList.Add(LstAsis);
-                    Datos.ItemsSource = null;
-                    Datos.ItemsSource = datosList;
-                    DAsistencia funcion = new DAsistencia();
-                    funcion.FinAsistencias(datosList, ID);
+                        DisplayAlert("ERROR", "No puede ser menor a 0", "OK");
+                    }
+                    else
+                    {
+                        stackLayout.IsEnabled = false;
+                        datosList.Add(LstAsis);
+                        Datos.ItemsSource = null;
+                        Datos.ItemsSource = datosList;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                DisplayAlert("Error", ex.Message, "OK");
+
+            }
+           
         }
     }
 }

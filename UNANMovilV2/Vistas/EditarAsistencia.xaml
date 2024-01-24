@@ -23,7 +23,7 @@
                 <!--Boton de Volver-->
                 <Frame Grid.Column="2" BackgroundColor="Transparent">
                     <Button Grid.Column="2" BackgroundColor="Transparent"
-                ImageSource="flecha_left2.png" x:Name="btnCerrar" Clicked="btnCerrar_Clicked"/>
+                ImageSource="flecha_left2.png" x:Name="BtnCerrar" Clicked="btnCerrar_Clicked"/>
                 </Frame>
             </Grid>
             <!--Contenedor de detalles-->
@@ -65,7 +65,7 @@
                                                FontAttributes="Bold" FontSize="25" TextColor="Black"/>
                                         <Label Text="{Binding Carrera}" Grid.Column="1" HorizontalOptions="CenterAndExpand"
                                                VerticalOptions="CenterAndExpand" FontSize="20" TextColor="#301C1C"/>
-                                    </Grid>
+                                    </Grid> 
                                     <!--Contenedor de Contenido-->
                                     <Grid ColumnDefinitions="170,*">
                                         <Label Text="Contenido: " VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
@@ -77,30 +77,33 @@
                                     <Grid ColumnDefinitions="170,*">
                                         <Label Text="Estado:" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                                                FontAttributes="Bold" FontSize="25" TextColor="Black" Margin="15,0,0,0"/>
-                                        <Button Grid.Column="1" Text="{Binding Estado}"  
+                                        <Label Grid.Column="1" Text="{Binding Estado}"  
                                                 HorizontalOptions="StartAndExpand"
                                                 VerticalOptions="CenterAndExpand" FontSize="20" 
                                                 BackgroundColor="Wheat"
-                                                TextColor="Red" 
-                                                x:Name="BtnEstado"
-                                                Clicked="BtnEstado_Clicked"/>
+                                                TextColor="Red" />
                                     </Grid>
                                     <!--Contenedor de mujeres-->
-                                    <Grid Grid.Row="5" ColumnDefinitions="Auto,60, auto,60" Margin="0,5,0,0">
+                                    <Grid Grid.Row="5" ColumnDefinitions="Auto,60, auto,60, *" Margin="0,5,0,0">
                                         <Label Text="Mujeres:" TextColor="Black" 
                                                FontSize="20" VerticalOptions="Center"
                                                HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
-                                        <Label Grid.Column="1" VerticalOptions="EndAndExpand"
+                                        <Entry Grid.Column="1" VerticalOptions="EndAndExpand"
                                                FontSize="20" Text="{Binding Mujeres}"
                                                TextColor="Black" Margin="0,0,0,5"
                                                HorizontalTextAlignment="Center"/>
                                         <Label Grid.Column="2" Text="Varones:" TextColor="Black" 
                                                FontSize="20" VerticalOptions="Center"
-                                               HorizontalOptions="End" FontAttributes="Bold" Margin="10,0,0,0" />
-                                        <Label Grid.Column="3" VerticalOptions="EndAndExpand"
+                                               HorizontalOptions="End" FontAttributes="Bold" />
+                                        <Entry Grid.Column="3" VerticalOptions="EndAndExpand"
                                                FontSize="20" Text="{Binding Varones}"
                                                TextColor="Black" Margin="0,0,0,5"
                                                HorizontalTextAlignment="Center"/>
+                                        <Button Text="Fin" Grid.Column="4" BackgroundColor="Wheat"
+                                                TextColor="Black" BorderColor="Black"
+                                                FontAttributes="Bold" BorderWidth="2"
+                                                Margin="10"
+                                                Clicked="Button_Clicked"/>
                                     </Grid>
                                     <BoxView BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
                                 </StackLayout>
@@ -113,7 +116,7 @@
             <CollectionView x:Name="Datos" IsVisible="false" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid RowDefinitions="20,20,20,4" BackgroundColor="Wheat"
+                        <Grid RowDefinitions="20,20,20,20,20,4" BackgroundColor="Wheat"
                               Padding="5">
                             <Label Grid.Row="0" Text="{Binding IdTema}"
                         FontSize="15"
@@ -130,11 +133,28 @@
                         TextColor="Black"
                         HorizontalTextAlignment="Center"
                         FontAttributes="Bold"/>
-                            <BoxView Grid.Row="3" BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
+                            <Label Grid.Row="3" Text="{Binding Mujeres}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   FontAttributes="Bold"/>
+                            <Label Grid.Row="4" Text="{Binding Varones}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   FontAttributes="Bold"/>
+                            <BoxView Grid.Row="5" BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Grid Grid.Row="3" BackgroundColor="Transparent" >
+                <Button Text="Guardar" BackgroundColor="SkyBlue" TextColor="Black"
+                        FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"
+                        CornerRadius="15" Margin="10,0,10,10" Padding="50,10"
+                        BorderColor="Black" BorderWidth="2"
+                ImageSource="save32px.png" x:Name="btnSalvar" Clicked="btnSalvar_Clicked"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

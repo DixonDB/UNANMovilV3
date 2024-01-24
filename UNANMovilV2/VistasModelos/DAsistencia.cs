@@ -27,8 +27,6 @@ namespace UNANMovilV2.VistasModelos
                     var parametros = new LAsistencia();
                     parametros.IdAsistencia = int.Parse(rdr["IdAsistencia"].ToString());
                     parametros.Fecha = DateTime.Parse(rdr["Fecha"].ToString()).ToString("dd/MMM/yyyy");
-                    //parametros.HoraInicio = DateTime.Parse(rdr["Hora de Entrada"].ToString()).ToString("HH:mm");
-                    //parametros.HoraFin = DateTime.Parse(rdr["Hora de Salida"].ToString()).ToString("HH:mm");
                     parametros.Bloques = int.Parse(rdr["Bloques"].ToString());
                     LstAsis.Add(parametros);
                 }
@@ -84,8 +82,16 @@ namespace UNANMovilV2.VistasModelos
                 cmd.Parameters.AddWithValue("@INSS", parametros.INSS);
                 cmd.Parameters.AddWithValue("@Fecha", parametros.Fecha2);
                 cmd.Parameters.AddWithValue("@Bloques", parametros.Bloques);
-                cmd.ExecuteNonQuery();
-                Application.Current.MainPage.DisplayAlert("Éxito", "Registro realizado", "OK");
+                var resu= cmd.ExecuteScalar();
+                if (resu != null) 
+                {
+                    string mensaje = resu.ToString();
+                    Application.Current.MainPage.DisplayAlert("Éxito", mensaje, "OK");
+                }
+                else
+                {
+                    Application.Current.MainPage.DisplayAlert("ERROR", "Ocurrió un error al ejecutar el procedimiento almacenado.", "OK");
+                }
             }
             catch (Exception ex)
             {
@@ -122,7 +128,7 @@ namespace UNANMovilV2.VistasModelos
                     parametros.Contenido = item["Contenido"].ToString();
                     parametros.Estado = item["Estado"].ToString();
                     parametros.Mujeres = int.Parse(item["Mujeres Asistencia"].ToString());
-                    parametros.Varones = int.Parse(item["Mujeres Asistencia"].ToString());
+                    parametros.Varones = int.Parse(item["Varones Asistencia"].ToString());
                     LstAsis.Add(parametros);
                 }
                 return LstAsis;
@@ -149,18 +155,22 @@ namespace UNANMovilV2.VistasModelos
                 columns.Add("Id");
                 columns.Add("Contenido");
                 columns.Add("Estado");
+                columns.Add("Varones");
+                columns.Add("Mujeres");
 
                 foreach (var oElement in lst)
                 {
                     dt.Rows.Add(
                         oElement.IdTema,
                         oElement.Contenido,
-                        oElement.Estado);
+                        oElement.Estado,
+                        oElement.Mujeres,
+                        oElement.Varones);
                 }
                 Conexion.Abrir();
                 SqlCommand cmd = new SqlCommand("FinalizarAsistencia", Conexion.conectar);
                 var parameterlst = new SqlParameter("@lstAsis", SqlDbType.Structured);
-                parameterlst.TypeName = "FinAsistencias";
+                parameterlst.TypeName = "FinAsistencias2";
                 parameterlst.Value = dt;
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -198,8 +208,6 @@ namespace UNANMovilV2.VistasModelos
                     var parametros = new LAsistencia();
                     parametros.IdAsistencia = int.Parse(rdr["IdAsistencia"].ToString());
                     parametros.Fecha = DateTime.Parse(rdr["Fecha"].ToString()).ToString("dd/MMM/yyyy");
-                    //parametros.HoraInicio = DateTime.Parse(rdr["Hora de Entrada"].ToString()).ToString("HH:mm");
-                    //parametros.HoraFin = DateTime.Parse(rdr["Hora de Salida"].ToString()).ToString("HH:mm");
                     parametros.Bloques = int.Parse(rdr["Bloques"].ToString());
                     LstAsis.Add(parametros);
                 }

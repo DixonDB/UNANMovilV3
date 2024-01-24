@@ -78,8 +78,10 @@
                                     <Grid ColumnDefinitions="auto,*">
                                         <Label Text="Estado:" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                                                FontAttributes="Bold" FontSize="25" TextColor="Black" Margin="15,0,0,0"/>
-                                        <Label Grid.Column="1" Text="{Binding Estado}" HorizontalOptions="StartAndExpand"
-                                               VerticalOptions="CenterAndExpand" FontSize="20" TextColor="Red" Margin="10,0,0,0"/>
+                                        <Button Grid.Column="1" Text="{Binding Estado}" HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="CenterAndExpand" FontSize="20" TextColor="Red" Margin="10,0,0,0"
+                                                x:Name="BtnEstado" Clicked="BtnEstado_Clicked"
+                                                BackgroundColor="Wheat"/>
                                     </Grid>
                                     <!--Contenedor de mujeres-->
                                     <Grid Grid.Row="5" ColumnDefinitions="Auto,60, auto,60" Margin="0,5,0,0">
@@ -106,6 +108,41 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </ScrollView>
+            <CollectionView x:Name="Datos" IsVisible="false" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="20,20,20,20,20,4" BackgroundColor="Wheat"
+                  Padding="5">
+                            <Label Grid.Row="0" Text="{Binding IdTema}"
+            FontSize="15"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Text="{Binding Contenido}"
+            FontSize="15"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"/>
+                            <Label Grid.Row="2" Text="{Binding Estado}"
+            FontSize="15"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"/>
+                            <Label Grid.Row="3" Text="{Binding Mujeres}"
+                       FontSize="15"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       FontAttributes="Bold"/>
+                            <Label Grid.Row="4" Text="{Binding Varones}"
+                       FontSize="15"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       FontAttributes="Bold"/>
+                            <BoxView Grid.Row="5" BackgroundColor="Black" HeightRequest="2" WidthRequest="500"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

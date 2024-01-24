@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using UNANMovilV2.Modelos;
 using UNANMovilV2.VistasModelos;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +14,7 @@ namespace UNANMovilV2.Vistas
         int ID;
         string Fecha;
         int bl;
+        List<LAsistencia> datosList = new List<LAsistencia>();
         public DetalleAsistencia(int IdAsis, string fecha,int bloque)
         {
             InitializeComponent();
@@ -43,6 +46,53 @@ namespace UNANMovilV2.Vistas
         protected override void OnAppearing()
         {
             Mostrar();
+        }
+        Button stackLayout;
+        private async void BtnEstado_Clicked(object sender, EventArgs e)
+        {
+            stackLayout = (Button)sender;
+            if (stackLayout.BindingContext is LAsistencia Asis)
+            {
+                var IdAsig = Asis.IdTema;
+                var Contenido = Asis.Contenido;
+                var Estado = Asis.Estado;
+                int mujeres = Asis.Mujeres;
+                int varones = Asis.Varones;
+                if (Estado == "Proceso")
+                {
+                    LAsistencia LstAsis = new LAsistencia
+                    {
+                        IdTema = IdAsig,
+                        Contenido = Contenido,
+                        Estado = "Finalizado",
+                        Mujeres = mujeres,
+                        Varones = varones
+                    };
+                    stackLayout.IsEnabled = false;
+                    datosList.Add(LstAsis);
+                    Datos.ItemsSource = null;
+                    Datos.ItemsSource = datosList;
+                    DAsistencia funcion = new DAsistencia();
+                    funcion.FinAsistencias(datosList, ID);
+                }
+                else
+                {
+                    LAsistencia LstAsis = new LAsistencia
+                    {
+                        IdTema = IdAsig,
+                        Contenido = Contenido,
+                        Estado = "Proceso",
+                        Mujeres = mujeres,
+                        Varones = varones
+                    };
+                    stackLayout.IsEnabled = false;
+                    datosList.Add(LstAsis);
+                    Datos.ItemsSource = null;
+                    Datos.ItemsSource = datosList;
+                    DAsistencia funcion = new DAsistencia();
+                    funcion.FinAsistencias(datosList, ID);
+                }
+            }
         }
     }
 }

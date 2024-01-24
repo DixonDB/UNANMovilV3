@@ -286,8 +286,8 @@ namespace UNANMovilV2.Vistas
 
         private bool validar2()
         {
-            double entero;
-            if (!double.TryParse(TxtVarones.Text, out entero) || !double.TryParse(TxtMujeres.Text, out entero))
+            int entero;
+            if (!int.TryParse(TxtVarones.Text, out entero) || !int.TryParse(TxtMujeres.Text, out entero))
             {
                 return false;
             }
