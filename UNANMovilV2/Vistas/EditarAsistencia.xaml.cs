@@ -14,6 +14,7 @@ namespace UNANMovilV2.Vistas
         DAsistencia Asis = new DAsistencia();
         int ID;
         int bl;
+        int mujeres, varones;
         public EditarAsistencia(int IdAsis, string fecha, int bloque)
         {
             InitializeComponent();
@@ -96,16 +97,16 @@ namespace UNANMovilV2.Vistas
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            try
+            stackLayout = (Button)sender;
+            if (stackLayout.BindingContext is LAsistencia Asis)
             {
-                stackLayout = (Button)sender;
-                if (stackLayout.BindingContext is LAsistencia Asis)
+                var IdAsig = Asis.IdTema;
+                var Contenido = Asis.Contenido;
+                var Estado = Asis.Estado;
+                mujeres = Asis.Mujeres;
+                varones = Asis.Varones;
+                if (validar2())
                 {
-                    var IdAsig = Asis.IdTema;
-                    var Contenido = Asis.Contenido;
-                    var Estado = Asis.Estado;
-                    var mujeres = Asis.Mujeres;
-                    var varones = Asis.Varones;
                     LAsistencia LstAsis = new LAsistencia
                     {
                         IdTema = IdAsig,
@@ -126,13 +127,20 @@ namespace UNANMovilV2.Vistas
                         Datos.ItemsSource = datosList;
                     }
                 }
+                else
+                {
+                    DisplayAlert("ERROR", "Mujeres y Varones deben ser números enteros.", "OK");
+                }
             }
-            catch (Exception ex)
+        }
+        private bool validar2()
+        {
+            int entero;
+            if (!int.TryParse(mujeres.ToString(), out entero) || !int.TryParse(varones.ToString(), out entero))
             {
-                DisplayAlert("Error", ex.Message, "OK");
-
+                return false;
             }
-           
+            return !(mujeres.ToString() == "" || varones.ToString() == ""); 
         }
     }
 }
