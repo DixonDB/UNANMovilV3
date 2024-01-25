@@ -15,7 +15,7 @@ namespace UNANMovilV2.Vistas
         private DAsignatura funcion;
         MModalidades mod = new MModalidades();
         int INSS = Login.INSS;
-        int idAsignatura, cant=4, i, j;
+        int idAsignatura, i, j;
         MAsignatura asignaturaSeleccionada;
         MAsignatura Idcont;
         private TimeSpan hora;
@@ -133,52 +133,44 @@ namespace UNANMovilV2.Vistas
             var Cont = PcContenido.SelectedItem as MAsignatura;
             var bloque = PcBloque.SelectedItem as MAsignatura;
             i++;
-            if (i <= cant)
-            {
-                if (validar2())
-                {
-                    // Crea un objeto MAsignatura con el elemento seleccionado
-                    MAsignatura LstAsis = new MAsignatura
-                    {
-                        IdAsig = asignaturaSeleccionada.IdAsig,
-                        Asignatura = asig.Asignatura,
-                        Carrera = LblCarrera.Text,
-                        Grupo = lblGrupo.Text,
-                        Contenido = Cont.Contenido,
-                        Mujeres = int.Parse(TxtMujeres.Text),
-                        Varones = int.Parse(TxtVarones.Text),
-                        IdTema = Cont.IdTema,
-                        Bloque=bloque.Bloque
-                    };
 
-                    bool bloqueExiste = datosList.Any(a => a.Bloque == LstAsis.Bloque);
-                    if (!bloqueExiste)
-                    {
-                        // Agrega el nuevo objeto a la lista global
-                        datosList.Add(LstAsis);
-                        // Actualiza la fuente de datos del ListView
-                        Datos.ItemsSource = null; // Primero, limpia la fuente de datos existente
-                        Datos.ItemsSource = datosList; // Luego, asigna la lista actualizada
-                        limpiar();
-                        j++;
-                        LblNum.Text = j.ToString();
-                        BtnGuardar.IsEnabled = true;
-                    }
-                    else
-                    {
-                        DisplayAlert("ERROR", "El bloque ya está ocupado", "OK");
-                    }
+            if (validar2())
+            {
+                // Crea un objeto MAsignatura con el elemento seleccionado
+                MAsignatura LstAsis = new MAsignatura
+                {
+                    IdAsig = asignaturaSeleccionada.IdAsig,
+                    Asignatura = asig.Asignatura,
+                    Carrera = LblCarrera.Text,
+                    Grupo = lblGrupo.Text,
+                    Contenido = Cont.Contenido,
+                    Mujeres = int.Parse(TxtMujeres.Text),
+                    Varones = int.Parse(TxtVarones.Text),
+                    IdTema = Cont.IdTema,
+                    Bloque = bloque.Bloque
+                };
+
+                bool bloqueExiste = datosList.Any(a => a.Bloque == LstAsis.Bloque);
+                if (!bloqueExiste)
+                {
+                    // Agrega el nuevo objeto a la lista global
+                    datosList.Add(LstAsis);
+                    // Actualiza la fuente de datos del ListView
+                    Datos.ItemsSource = null; // Primero, limpia la fuente de datos existente
+                    Datos.ItemsSource = datosList; // Luego, asigna la lista actualizada
+                    limpiar();
+                    j++;
+                    LblNum.Text = j.ToString();
+                    BtnGuardar.IsEnabled = true;
                 }
                 else
                 {
-                    DisplayAlert("ERROR", "Debe de rellenar todos los campos", "OK");
+                    DisplayAlert("ERROR", "El bloque ya está ocupado", "OK");
                 }
             }
-            if (i == cant)
+            else
             {
-                contenedor.IsEnabled = false;
-                contenedor.BackgroundColor = Color.FromHex("#b5b5b5");
-                BtnBloque.BackgroundColor = Color.FromHex("#b5b5b5");
+                DisplayAlert("ERROR", "Debe de rellenar todos los campos", "OK");
             }
         }
 
